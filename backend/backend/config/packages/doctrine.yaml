@@ -1,0 +1,62 @@
+doctrine:
+    dbal:
+        connections:
+            mysql:
+                driver: 'pdo_mysql'
+                url: '%env(resolve:DATABASE_URL_MYSQL)%'
+                server_version: '8.0'
+                charset: UTF8
+                profiling_collect_backtrace: '%kernel.debug%'
+                use_savepoints: true
+
+            postgres:
+                driver: 'pdo_pgsql'
+                url: '%env(resolve:DATABASE_URL_POSTGRES)%'
+                server_version: '13'
+                charset: UTF8
+                profiling_collect_backtrace: '%kernel.debug%'
+                use_savepoints: true
+
+        # Configuration par défaut pour MySQL
+        default_connection: 'postgres'  # Cela utilise la connexion MySQL par défaut
+
+    orm:
+        auto_generate_proxy_classes: true
+        enable_lazy_ghost_objects: true
+        report_fields_where_declared: true
+        validate_xml_mapping: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            App:
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'App\Entity'
+                alias: App
+        controller_resolver:
+            auto_mapping: false
+
+when@test:
+    doctrine:
+        dbal:
+            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+
+when@prod:
+    doctrine:
+        orm:
+            auto_generate_proxy_classes: false
+            proxy_dir: '%kernel.build_dir%/doctrine/orm/Proxies'
+            query_cache_driver:
+                type: pool
+                pool: doctrine.system_cache_pool
+            result_cache_driver:
+                type: pool
+                pool: doctrine.result_cache_pool
+
+    framework:
+        cache:
+            pools:
+                doctrine.result_cache_pool:
+                    adapter: cache.app
+                doctrine.system_cache_pool:
+                    adapter: cache.system

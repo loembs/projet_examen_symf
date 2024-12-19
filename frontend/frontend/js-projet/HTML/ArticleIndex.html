@@ -1,0 +1,123 @@
+<div class="mb-4 flex justify-between flex-wrap">
+  <span class="text-gray-600 text-xl font-bold mb-2 sm:mb-0">Approvisionnement</span>
+  <button
+    class="bg-blue-500 text-white px-4 py-2 rounded"
+    data-modal-target="articleModal"
+    data-modal-toggle="articleModal"
+  >
+    Nouveau Article
+  </button>
+</div>
+
+<div class="product-lists">
+  <!-- Liste des produits disponibles -->
+  <div class="product-list bg-white rounded-lg shadow p-4 mb-4">
+    <h2 class="text-2xl font-bold mb-4">Lister les produits</h2>
+    
+    <!-- Boutons de filtre -->
+    <div class="mb-4 flex flex-wrap gap-2">
+      <button data-filter="RUP" class="filter-btn bg-red-500 text-white px-4 py-2">RUP</button>
+      <button data-filter="DIS" class="filter-btn bg-gray-300 text-gray-700 px-4 py-2">DIS</button>
+      <button data-filter="ALL" class="filter-btn bg-gray-300 text-gray-700 px-4 py-2">ALL</button>
+    </div>
+
+    <!-- Barre de recherche -->
+    <div class="flex mb-4 flex-wrap">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Rechercher un article..."
+        class="border rounded px-4 py-2 w-3/4"
+      />
+      <button 
+        id="searchButton" 
+        class="bg-blue-500 text-white px-4 py-2 rounded ml-4"
+      >
+        Rechercher
+      </button>
+    </div>
+
+    <!-- Tableau des articles -->
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead>
+          <tr class="bg-blue-500 text-white">
+            <th class="p-2 text-center">
+              <input 
+                type="checkbox" 
+                id="selectAllArticles"
+                class="form-checkbox h-4 w-4 text-blue-600"
+              />
+            </th>
+            <th class="py-2 px-4 text-center">Libellé</th>
+            <th class="py-2 px-4 text-center">Prix</th>
+            <th class="py-2 px-4 text-center">Qte en stock</th>
+          </tr>
+        </thead>
+        <tbody id="articlesTable">
+          <!-- Contenu dynamique -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="flex justify-center mt-4" id="articlesPagination">
+      <button class="px-3 py-1 border rounded mr-1" data-page="prev">&lt;</button>
+      <div id="pagesContainer" class="flex">
+        <!-- Les pages seront générées dynamiquement -->
+      </div>
+      <button class="px-3 py-1 border rounded" data-page="next">&gt;</button>
+    </div>
+  </div>
+
+  <!-- Liste des produits sélectionnés -->
+  <div class="product-list bg-white rounded-lg shadow p-4">
+    <div class="flex justify-between items-center mb-4 flex-wrap">
+      <h3 class="text-xl font-bold mb-2 sm:mb-0">
+        Liste des produits sélectionnés
+      </h3>
+    </div>
+
+    <!-- Total -->
+    <div class="mb-4">
+      <label class="block mb-2">Total:</label>
+      <input 
+        type="text" 
+        id="totalAmount"
+        class="border rounded px-4 py-2 w-full"
+        readonly
+      />
+    </div>
+
+    <!-- Tableau des articles sélectionnés -->
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead>
+          <tr class="bg-blue-500 text-white">
+            <th class="py-2 px-4 text-center">ARTICLE</th>
+            <th class="py-2 px-4 text-center">PRIX</th>
+            <th class="py-2 px-4 text-center">QUANTITÉ</th>
+            <th class="py-2 px-4 text-center">ACTION</th>
+          </tr>
+        </thead>
+        <tbody id="selectedArticlesTable">
+          <!-- Contenu dynamique -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination et bouton de sauvegarde -->
+    <div class="w-full h-12 flex justify-between mt-4 flex-wrap">
+      <div class="flex justify-center mt-4 mb-2 sm:mb-0" id="selectedArticlesPagination">
+        <button class="px-3 py-1 border rounded mr-1" data-page="prev">&lt;</button>
+        <div id="selectedPagesContainer" class="flex">
+          <!-- Les pages seront générées dynamiquement -->
+        </div>
+        <button class="px-3 py-1 border rounded" data-page="next">&gt;</button>
+      </div>
+      <button id="saveButton" class="bg-blue-500 text-white px-6 py-2 rounded mt-2 sm:mt-0 hover:bg-blue-600">
+        Enregistrer
+      </button>
+    </div>
+  </div>
+</div>
